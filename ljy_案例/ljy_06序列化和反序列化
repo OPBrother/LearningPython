@@ -1,0 +1,39 @@
+'''
+为什么要序列化：
+    内存中的数据类型---->序列化---->特定的格式（json格式或者pickle格式）
+    特定的格式----->反序列化---->内存中的数据
+
+土办法：
+{‘aaa’：111}---->序列化str({'aaa':111})----->"{'aaa':111}" json格式
+{‘aaa’：111}json格式---->反序列化eval({'aaa':111})---->"{'aaa':111}"
+
+为何要序列化：
+    1.用于储存
+    2.传输给其他平台
+'''
+
+import json
+
+'''
+# 序列化
+json_res = json.dumps([1, 'aaa', True, False])
+with open('test.json', mode="wt", encoding='utf-8') as f:
+    f.write(json_res)
+    f.close()
+
+# 反序列化
+with open('test.json', mode="rt", encoding='utf-8') as f:
+    json_res = f.read()
+    l = json.loads(json_res)
+    print(l, type(l))
+'''
+with open('test.json', mode="wt", encoding='utf-8') as f:
+    json.dump([1, 'aaa', True, False], f)
+
+with open('test.json', mode="rt", encoding='utf-8') as f:
+    l = json.load(f)
+    print(l, type(l))
+
+# json验证：json格式兼容所有语言通用类型，不能识别某语言特定类型
+# json.dump({1,2,3,4,5})
+
